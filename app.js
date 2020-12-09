@@ -6,9 +6,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.json({
-    ipInfo: req.socket.address()
+    ip: req.ip || req.connection.remoteAddress || 'null',
 }));
-  
-const server = app.listen(3000, '2600:1f18:1492:9200:fc2f:689a:db6d:138f', () => {
-    console.log("app running on port.", server.address().port);
-});
+
+const listenServer = () => {
+    console.log('App running on');
+};
+
+// Use IPv4 address to listen on IPv4
+app.listen(3000, '0.0.0.0', listenServer);
+
+// Use IPv6 address to listen on IPv6.
+app.listen(3000, '2401:4900:169e:80c3:11e9:63ba:1f81:d224', listenServer);
