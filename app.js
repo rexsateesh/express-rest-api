@@ -6,7 +6,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.json({
-    ip: req.header('X-Forwarded-For'),
+    ipForwarded: req.header('X-Forwarded-For') || null,
     remoteAddress: req.connection.remoteAddress,
     socketRemoteAds: req.socket.remoteAddress,
 }));
