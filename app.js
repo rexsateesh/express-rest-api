@@ -41,15 +41,13 @@ app.get("/", (req, res) => res.json({
     ipForwarded: req.header('X-Forwarded-For') || null,
     remoteAddress: req.connection.remoteAddress,
     socketRemoteAds: req.socket.remoteAddress,
-    localIp: getLocalIpv6()
+    // localIp: getLocalIpv6()
 }));
 
 const listenServer = () => {
     console.log('App running on');
 };
 
-// Use IPv4 address to listen on IPv4
-app.listen(8080, '0.0.0.0', listenServer);
+// Listen server
+app.listen(8080, listenServer);
 
-// Use IPv6 address to listen on IPv6.
-app.listen(8080, getLocalIpv6(), listenServer);
